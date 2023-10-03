@@ -3,10 +3,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center">Список таблиц</div>
-
                 <div class="card-body">
                     <p>
-                        <router-link :to="{ name: 'create' }" class="btn btn-primary">Создать таблицу</router-link>
+                        <Link :href="route('spreadsheet.create')" class="btn btn-primary">Создать таблицу</Link>
                     </p>
                     <ul v-if="spreadsheets" class="list-group">
                         <li v-for="spreadsheet in spreadsheets" class="list-group-item" :key="spreadsheet.id">
@@ -20,29 +19,15 @@
 </template>
 
 <script>
+    import { Link } from '@inertiajs/inertia-vue3'
+
     export default {
-        name: "Index",
+        props: [
+            'spreadsheets'
+        ],
 
-        data() {
-            return {
-                spreadsheets: null,
-            }
-        },
-
-        mounted() {
-            this.getSpreadsheets()
-        },
-
-        methods: {
-            getSpreadsheets() {
-                axios.get(`/api/spreadsheets`)
-                    .then(res => {
-                        this.spreadsheets = res.data.result
-                    })
-                    .catch(err => {
-                        console.log(err.response.data.error)
-                    })
-            },
+        components: {
+            Link,
         },
     }
 </script>

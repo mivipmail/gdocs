@@ -1,10 +1,16 @@
 import './bootstrap';
-import { createApp } from 'vue';
-import App from "./components/App";
-import router from "./router"
+import { createApp, h } from 'vue';
+import { App, plugin } from '@inertiajs/inertia-vue3';
 
-const app = createApp({});
-app.component('App', App);
+const el = document.getElementById('app')
 
-app.use(router);
-app.mount('#app');
+const app = createApp({
+    render: () => h(App, {
+      initialPage: JSON.parse(el.dataset.page),
+      resolveComponent: name => require(`./Pages/${name}`).default,
+    })
+}).use(plugin)
+
+app.mixin({ methods: { route } })
+
+app.mount(el)

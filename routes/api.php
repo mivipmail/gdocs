@@ -13,12 +13,3 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-
-Route::post('/spreadsheets', App\Http\Controllers\Spreadsheet\StoreController::class);
-Route::get('/spreadsheets', App\Http\Controllers\Spreadsheet\IndexController::class);
-
-
-// Route::post('/user', function (Request $request) {
-//     return $request->user();
-// });
